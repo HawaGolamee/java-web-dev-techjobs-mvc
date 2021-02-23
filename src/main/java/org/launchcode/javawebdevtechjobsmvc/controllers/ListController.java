@@ -16,22 +16,11 @@ import java.util.HashMap;
  */
 @Controller
 @RequestMapping(value = "list")
-public class ListController {
+public class ListController extends TechJobsController{
 
-    static HashMap<String, String> columnChoices = new HashMap<>();
-    static HashMap<String, Object> tableChoices = new HashMap<>();
 
     public ListController () {
-        columnChoices.put("all", "All");
-        columnChoices.put("employer", "Employer");
-        columnChoices.put("location", "Location");
-        columnChoices.put("positionType", "Position Type");
-        columnChoices.put("coreCompetency", "Skill");
-
-        tableChoices.put("employer", JobData.getAllEmployers());
-        tableChoices.put("location", JobData.getAllLocations());
-        tableChoices.put("positionType", JobData.getAllPositionTypes());
-        tableChoices.put("coreCompetency", JobData.getAllCoreCompetency());
+       super();
     }
 
     @RequestMapping(value = "")
@@ -54,7 +43,7 @@ public class ListController {
             model.addAttribute("title", "All Jobs");
         } else {
             jobs = JobData.findByColumnAndValue(column, value);
-            model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": " + value);
+            model.addAttribute("title", "Jobs with " + columnChoices.get(column) + ": "+ value);
         }
         model.addAttribute("jobs", jobs);
 
